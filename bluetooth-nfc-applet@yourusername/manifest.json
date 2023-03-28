@@ -1,0 +1,16 @@
+{
+    "cinnamon-version": ["4.0"],
+    "description": "Bluetooth and NFC applet",
+    "name": "Bluetooth and NFC applet",
+    "icon": "icon.png",
+    "uuid": "bluetooth-nfc-applet@yourusername",
+    "version": "1.0",
+    "applet": {
+        "id": "bluetooth-nfc-applet@yourusername",
+        "name": "Bluetooth and NFC applet",
+        "description": "Bluetooth and NFC applet",
+        "uuid": "bluetooth-nfc-applet@yourusername",
+        "icon": "icon.png",
+        "instance_id": "BluetoothNFCApplet"
+    }
+}

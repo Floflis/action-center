@@ -1,0 +1,1 @@
+bluetooth-nfc-applet@yourusername folder with the manifest.json, applet.js and applet.css files were initially made by ChatGPT in the "AIDaniella" chateroom from Daniella Mesquita's prompt
