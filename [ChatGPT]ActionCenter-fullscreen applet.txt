@@ -1,0 +1,47 @@
+"Is it also possible for an applet to fill the screen?"
+
+As for filling the screen with an applet, it is technically possible but not recommended, as it can interfere with the user's ability to interact with the desktop environment. Instead, it is generally better to use a full-screen window or dialog for such purposes. However, if you really need to do this, you can set the applet's width and height to the screen width and height, respectively, like this:
+
+myApplet.actor.set_size(global.screen_width, global.screen_height);
+
+"Is it possible to set such fullscreen applet size while considering the panels' size? So it won't cover the panels"
+
+Yes, it's possible to set the size of a fullscreen applet while considering the panels' size. In Cinnamon, the size of the panels can be accessed through the global.screen object. Specifically, the get_primary_monitor() method can be used to get the primary monitor's dimensions, and the get_panel_height() method can be used to get the height of the panels.
+
+Using these methods, you can calculate the maximum size of an applet that won't cover the panels. For example, here's some code that sets the size of a fullscreen applet while leaving space for the panels:
+
+const { Clutter, Gio, GLib, St } = imports.gi;
+
+let Applet = class extends St.Widget {
+    constructor() {
+        super();
+        this.set_position(0, 0);
+
+        // Get primary monitor dimensions and panel height
+        let monitor = global.screen.get_primary_monitor();
+        let panelHeight = global.screen.get_panel_height(St.Side.TOP);
+
+        // Calculate maximum applet size
+        let maxAppletWidth = monitor.width;
+        let maxAppletHeight = monitor.height - panelHeight;
+
+        // Set applet size
+        this.set_size(maxAppletWidth, maxAppletHeight);
+    }
+};
+
+function init() {
+    // Initialization code here
+}
+
+function enable() {
+    // Create and add applet to the panel
+    let applet = new Applet();
+    Main.panel.addToPanel(applet, 0, 0);
+}
+
+function disable() {
+    // Cleanup code here
+}
+
+This code creates an applet that fills the entire screen except for the panels at the top and bottom. The get_panel_height() method is used to determine the height of the top panel, and the monitor.height property is used to determine the height of the primary monitor. The applet's height is set to the difference between these two values, and its width is set to the width of the primary monitor.
